@@ -11,7 +11,8 @@ import java.io.IOException;
 
 /**
  * Created by pengpeng on 15-12-6.
- */建立一个本地音乐播放器，实现IAudioPlayer
+ 建立一个本地音乐播放器，继承MediaPlayer类,实现IAudioPlayer接口
+ */
 public class LocalAudioPlayer extends MediaPlayer implements IAudioPlayer{
     private Context context;
     private AudioInfo audioInfo;//本地音频特有
@@ -40,7 +41,7 @@ public class LocalAudioPlayer extends MediaPlayer implements IAudioPlayer{
         return this.audioInfo;
     }
 
-    public void playPause() {
+    public void playPause() {   //暂停，调用MediaPlayer的isPlaying方法判断是否正在播放，否即报错
         if (isPlaying()) {
             pause();
             this.paused = true;
@@ -49,7 +50,7 @@ public class LocalAudioPlayer extends MediaPlayer implements IAudioPlayer{
         }
     }
 
-    public void playPrevious() {
+    public void playPrevious() {    //播放上一首，调用cursor的moveToPrevious方法，再调用playPrepared和MediaPlayer的start方法；若空报错；调用Cursor的isFirst方法判断是否为第一首
         if (cursor == null) {
             Toast.makeText(context, "The cursor is null", Toast.LENGTH_SHORT).show();
         } else if (cursor.isFirst()) {
@@ -61,7 +62,7 @@ public class LocalAudioPlayer extends MediaPlayer implements IAudioPlayer{
         }
     }
 
-    public void playNext() {
+    public void playNext() {    //播放下一首，调用cursor的moveToNext方法，再调用playPrepared和MediaPlayer的start方法；若空报错，调用Cursor的isLast方法判断是否为最后一首
         if (cursor == null) {
             Toast.makeText(context, "The cursor is null", Toast.LENGTH_SHORT).show();
         } else if (cursor.isLast()) {
@@ -73,7 +74,7 @@ public class LocalAudioPlayer extends MediaPlayer implements IAudioPlayer{
         }
     }
 
-    public void playPrepared() {
+    public void playPrepared() {    //准备，传入音频URL，调用MediaPlayer的prepare方法且设prepared为true；若出错，打印异常
 //        String urlString = "http://music.baidutt.com/up/kwcackwa/cmypus.mp3";
 //        mediaPlayer.setDataSource(urlString);
         Uri contentUri = audioInfo.getCurrentAudioUri(cursor);
@@ -88,7 +89,7 @@ public class LocalAudioPlayer extends MediaPlayer implements IAudioPlayer{
         }
     }
 
-    public void play() {
+    public void play() {     //播放，判断是否暂停，若是，开始播放且设pause为false；若不是，调用playPrepared方法，再开始播放且设pause为false
         if (isPaused()) {
             start();
             paused = false;
