@@ -8,7 +8,7 @@ import android.util.Log;
 
 /**
  * Created by pengpeng on 15-12-8.
- */
+ */建立一个类表示音频信息
 public class AudioInfo {
     private static final String TAG = "AudioInfo";
 
