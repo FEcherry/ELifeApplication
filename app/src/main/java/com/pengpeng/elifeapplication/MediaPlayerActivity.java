@@ -47,7 +47,7 @@ public class MediaPlayerActivity extends ActionBarActivity implements View.OnCli
                     if (localAudioPlayer != null && localAudioPlayer.isPrepared()) {
                         int totalTime = localAudioPlayer.getDuration();
                         int currentTime = localAudioPlayer.getCurrentPosition();
-                        int seekBarMax = seekBar.getMax();
+                        int seekBarMax = seekBar.getMax();  //SeekBar继承ProgressBar类，调用ProgressBar的getMax方法取得进度条设置的最大值
                         Log.e("Progress: ", totalTime + " " + currentTime + " " + seekBarMax);
                         if (totalTime > 0 && currentTime > 0 && seekBarMax > 0) {
                             Log.i("Progress: ", String.valueOf(seekBar.getProgress()));
@@ -78,7 +78,7 @@ public class MediaPlayerActivity extends ActionBarActivity implements View.OnCli
         ContentResolver contentResolver = getContentResolver();
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         Log.i(TAG + " EXT_CON_URI", uri.toString());
-        Cursor cursor = contentResolver.query(uri, null, null, null, null);
+        Cursor cursor = contentResolver.query(uri, null, null, null, null);//调用内容解析器ContentResolver的query方法，提交数据给cursor
         if (cursor == null) {
             Log.i(TAG, "--->Query failed!");
             return null;
@@ -96,8 +96,8 @@ public class MediaPlayerActivity extends ActionBarActivity implements View.OnCli
         nextButton.setOnClickListener(this);
         preButton.setOnClickListener(this);
         loopButton.setOnClickListener(this);
-        localAudioPlayer.setOnCompletionListener(this);
-        seekBar.setOnSeekBarChangeListener(new ProgressBarListener());
+        localAudioPlayer.setOnCompletionListener(this);    //完成监听器
+        seekBar.setOnSeekBarChangeListener(new ProgressBarListener());   //进度条改变监听器
         jumpButton.setOnClickListener(this);
     }
 
@@ -181,16 +181,10 @@ public class MediaPlayerActivity extends ActionBarActivity implements View.OnCli
                 }
                 break;
             case R.id.loop_btn:
-                localAudioPlayer.setLooping(true);
-                break;
-            case R.id.button:
-                Intent intent = new Intent(MediaPlayerActivity.this, NetworkPlayerActivity.class);
-                startActivity(intent);
-                break;
-        }
+                localAudioPlayer.setLoopin.0. 
         endTimeText.setText(getTimeText(localAudioPlayer.getDuration()));
         intent = new Intent(MediaPlayerActivity.this, MediaPlayerService.class);
-        intent.putExtra("songName", localAudioPlayer.getAudioInfo().getCurrentAudioTitle(cursor));
+        intent.putExtra("songName", localAudioPlayer.getAudioInfo().getCurrentAudioTitle(cursor));//将音频名字传递给”songname“
         startService(intent);
     }
 
