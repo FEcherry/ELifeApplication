@@ -12,21 +12,21 @@ import android.util.Log;
 public class AudioInfo {
     private static final String TAG = "AudioInfo";
 
-    public long getCurrentAudioId(Cursor cursor) {
+    public long getCurrentAudioId(Cursor cursor) {     /媒体数据库的ＩＤ信息提取给Cursor，得到音频ＩＤ
         int idColumn = cursor.getColumnIndex(MediaStore.Audio.Media._ID);
         long thisId = cursor.getLong(idColumn);
         Log.i(TAG + " thisId", String.valueOf(thisId));
         return thisId;
     }
 
-    public String getCurrentAudioTitle(Cursor cursor) {
+    public String getCurrentAudioTitle(Cursor cursor) {      /媒体数据库的名字信息提取给Cursor，得到音频名字
         int titleColumn = cursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
         String thisTitle = cursor.getString(titleColumn);
         Log.i(TAG + " thisTitle", thisTitle);
         return thisTitle;
     }
 
-    public Uri getCurrentAudioUri(Cursor cursor){
+    public Uri getCurrentAudioUri(Cursor cursor){       /媒体数据库的ＵＲＬ信息提取给Cursor，得到音频ＵＲＬ
         long thisId = getCurrentAudioId(cursor);
         Uri contentUri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, thisId);
         Log.i(TAG + " contentUri", contentUri.toString());
