@@ -11,7 +11,7 @@ import java.io.IOException;
 
 /**
  * Created by pengpeng on 15-12-6.
- */
+ */建立一个本地音乐播放器，实现IAudioPlayer
 public class LocalAudioPlayer extends MediaPlayer implements IAudioPlayer{
     private Context context;
     private AudioInfo audioInfo;//本地音频特有
