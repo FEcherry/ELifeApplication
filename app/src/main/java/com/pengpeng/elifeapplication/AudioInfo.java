@@ -26,7 +26,7 @@ public class AudioInfo {
         return thisTitle;
     }
 
-    public Uri getCurrentAudioUri(Cursor cursor){       /媒体数据库的ＵＲＬ信息提取给Cursor，得到音频ＵＲＬ
+    public Uri getCurrentAudioUri(Cursor cursor){       /得到数据库cursor中音频ＩＤ，从媒体数据库提取音频ＵＲＬ后加上其ＩＤ，得到最后ＵＲＬ
         long thisId = getCurrentAudioId(cursor);
         Uri contentUri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, thisId);
         Log.i(TAG + " contentUri", contentUri.toString());
